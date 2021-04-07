@@ -1,6 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+  Platform,
+  StatusBar,
+} from "react-native";
 
 export default function App() {
   return (
@@ -13,8 +20,9 @@ export default function App() {
             "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png",
         }}
       ></Image>
-      <Text>CATCH!</Text>
+      <Text style={styles.textsplash}>CATCH!</Text>
       <Image
+        style={styles.splashimage}
         source={{
           width: 255,
           height: 255,
@@ -31,7 +39,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#A5E0FF",
     alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  textsplash: {
+    fontSize: 52,
+    color: "#fff",
+    fontStyle: "italic",
+    paddingTop: 20,
+  },
+  splashimage: {
+    marginTop: 50,
   },
 });
