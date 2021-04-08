@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   splashimage: {
-    marginTop: 50,
+    marginTop: 80,
   },
 });
