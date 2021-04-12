@@ -9,6 +9,8 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 function Splashscreen() {
   return (
