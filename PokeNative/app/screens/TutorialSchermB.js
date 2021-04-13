@@ -1,11 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import * as React from "react";
+import React from "react";
 import { ImageBackground } from "react-native";
 import {
   Dimensions,
   StyleSheet,
-  Button,
   Text,
   View,
   Image,
@@ -14,7 +13,7 @@ import {
   StatusBar,
 } from "react-native";
 
-function TutorialScherm({ navigation }) {
+function TutorialSchermB(navigation) {
   return (
     <View style={styles.background}>
       <Image
@@ -26,13 +25,10 @@ function TutorialScherm({ navigation }) {
             "https://www.serebii.net/pokemonmasters/syncpairs/professoroak.png",
         }}
       ></Image>
-      <View
-        style={styles.tutor}
-        onPress={() => navigation.navigate("TutorialSchermB")}
-      >
+      <View style={styles.tutor}>
         <Text>
-          Hi, I'm proffesor Oak and welcome to the world of Pokémon! First, what
-          is your name?
+          Your very own Pokémon legend is about to unfold! A world of dreams and
+          adventures with Pokémon awaits! Let's go!
         </Text>
         <View style={styles.vormpje}></View>
       </View>
@@ -78,4 +74,4 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "180deg" }],
   },
 });
-export default TutorialScherm;
+export default TutorialSchermB;
