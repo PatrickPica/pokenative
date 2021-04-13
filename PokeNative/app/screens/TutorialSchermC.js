@@ -14,7 +14,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-function TutorialSchermB(navigation) {
+function TutorialSchermB({ navigation }) {
   return (
     <SafeAreaView style={styles.background}>
       <Image
@@ -33,7 +33,6 @@ function TutorialSchermB(navigation) {
         <TouchableOpacity
           title=">"
           style={styles.knop}
-          onPress={() => navigation.navigate("TutorialSchermC")}
         ></TouchableOpacity>
       </View>
     </SafeAreaView>

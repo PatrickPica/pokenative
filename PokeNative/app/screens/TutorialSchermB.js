@@ -14,7 +14,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-function TutorialSchermB(navigation) {
+function TutorialSchermB({ navigation }) {
   return (
     <SafeAreaView style={styles.background}>
       <Image
