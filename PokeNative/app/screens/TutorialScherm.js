@@ -30,6 +30,11 @@ function TutorialScherm({ navigation }) {
         style={styles.tutor}
         onPress={() => navigation.navigate("TutorialSchermB")}
       >
+        <Button
+          title=">"
+          style={styles.verderknop}
+          onPress={() => navigation.navigate("TutorialSchermB")}
+        ></Button>
         <Text>
           Hi, I'm proffesor Oak and welcome to the world of Pokémon! First, what
           is your name?
@@ -76,6 +81,10 @@ const styles = StyleSheet.create({
     borderRightColor: "transparent",
     borderBottomColor: "red",
     transform: [{ rotate: "180deg" }],
+  },
+  verderknop: {
+    width: 10,
+    height: 20,
   },
 });
 export default TutorialScherm;

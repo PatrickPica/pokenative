@@ -9,7 +9,11 @@ import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => (
-  <Stack.Navigator>
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
     <Stack.Screen name="TutorialScherm" component={TutorialScherm} />
     <Stack.Screen name="TutorialSchermB" component={TutorialSchermB} />
   </Stack.Navigator>
