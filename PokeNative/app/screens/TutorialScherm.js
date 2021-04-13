@@ -12,11 +12,12 @@ import {
   SafeAreaView,
   Platform,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 
 function TutorialScherm({ navigation }) {
   return (
-    <View style={styles.background}>
+    <SafeAreaView style={styles.background}>
       <Image
         style={styles.profoak}
         source={{
@@ -28,20 +29,19 @@ function TutorialScherm({ navigation }) {
       ></Image>
       <View
         style={styles.tutor}
-        onPress={() => navigation.navigate("TutorialSchermB")}
       >
-        <Button
-          title=">"
-          style={styles.verderknop}
-          onPress={() => navigation.navigate("TutorialSchermB")}
-        ></Button>
+
         <Text>
           Hi, I'm proffesor Oak and welcome to the world of Pokémon! First, what
           is your name?
         </Text>
-        <View style={styles.vormpje}></View>
+        <TouchableOpacity
+          title=">"
+          style={styles.knop}
+          onPress={() => navigation.navigate("TutorialSchermB")}
+        ></TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     borderColor: "#8DD8FF",
     borderWidth: 3,
   },
-  vormpje: {
+  knop: {
     backgroundColor: "#FF2222",
     position: "absolute",
     right: 20,
@@ -81,10 +81,6 @@ const styles = StyleSheet.create({
     borderRightColor: "transparent",
     borderBottomColor: "red",
     transform: [{ rotate: "180deg" }],
-  },
-  verderknop: {
-    width: 10,
-    height: 20,
   },
 });
 export default TutorialScherm;

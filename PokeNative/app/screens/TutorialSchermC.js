@@ -28,8 +28,7 @@ function TutorialSchermB(navigation) {
       ></Image>
       <View style={styles.tutor}>
         <Text>
-          Your very own Pokémon legend is about to unfold! A world of dreams and
-          adventures with Pokémon awaits! Let's go!
+        Oh, right! Before I forget, I have a request for you. Here in the top left corner is my invention, Pokédex! 
         </Text>
         <TouchableOpacity
           title=">"
