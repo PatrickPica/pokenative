@@ -31,9 +31,10 @@ function TutorialSchermD({ navigation }) {
         <Text>
         It automatically records data on Pokémon you’ve seen or caught!
 Well go out there and good luck!        </Text>
-        <TouchableOpacity
+<TouchableOpacity
           title=">"
           style={styles.knop}
+          onPress={() => navigation.navigate("encounter")}
         ></TouchableOpacity>
       </View>
     </SafeAreaView>

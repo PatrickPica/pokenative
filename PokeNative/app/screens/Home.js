@@ -1,12 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Button, useState } from 'react-native'
 
-export default function Home() {
+
+  export default function pokemon() {
     return (
-        <View>
+        <SafeAreaView>
             <Text></Text>
-        </View>
+            <Button title="kut"></Button>
+        </SafeAreaView>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+})
