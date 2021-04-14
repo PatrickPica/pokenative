@@ -1,21 +1,33 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { View } from "react-native";
+import SplashScreen from "./app/screens/SplashScreen";
+import TutorialScherm from "./app/screens/TutorialScherm";
+import TutorialSchermB from "./app/screens/TutorialSchermB";
+import TutorialSchermC from "./app/screens/TutorialSchermC";
+import TutorialSchermD from "./app/screens/TutorialSchermD";
+import { createStackNavigator } from "@react-navigation/stack";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+
+const Stack = createStackNavigator();
+const StackNavigator = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <Stack.Screen name="TutorialScherm" component={TutorialScherm} />
+    <Stack.Screen name="TutorialSchermB" component={TutorialSchermB} />
+    <Stack.Screen name="TutorialSchermC" component={TutorialSchermC} />
+    <Stack.Screen name="TutorialSchermD" component={TutorialSchermD} />
+
+  </Stack.Navigator>
+);
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#A5E0FF",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
