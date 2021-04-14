@@ -14,9 +14,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-function TutorialSchermB({ navigation }) {
+function TutorialSchermD({ navigation }) {
   return (
     <SafeAreaView style={styles.background}>
+      <Image style={styles.pokedexicon} source={require('../assets/pokedexicon.png')}/>
       <Image
         style={styles.profoak}
         source={{
@@ -28,13 +29,11 @@ function TutorialSchermB({ navigation }) {
       ></Image>
       <View style={styles.tutor}>
         <Text>
-          Your very own Pokémon legend is about to unfold! A world of dreams and
-          adventures with Pokémon awaits! Let's go!
-        </Text>
+        It automatically records data on Pokémon you’ve seen or caught!
+Well go out there and good luck!        </Text>
         <TouchableOpacity
           title=">"
           style={styles.knop}
-          onPress={() => navigation.navigate("TutorialSchermC")}
         ></TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -53,6 +52,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 50,
   },
+  pokedexicon: {
+    position: "absolute",
+    top: 60,
+    left: 40,
+    width: 42,
+    height: 42,
+  },
+
   tutor: {
     marginTop: 50,
     maxWidth: 323,
@@ -80,4 +87,4 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "180deg" }],
   },
 });
-export default TutorialSchermB;
+export default TutorialSchermD;

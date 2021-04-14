@@ -14,9 +14,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-function TutorialSchermB({ navigation }) {
+function TutorialSchermC({ navigation }) {
   return (
     <SafeAreaView style={styles.background}>
+      <Image style={styles.pokedexicon} source={require('../assets/pokedexicon.png')}/>
       <Image
         style={styles.profoak}
         source={{
@@ -33,6 +34,7 @@ function TutorialSchermB({ navigation }) {
         <TouchableOpacity
           title=">"
           style={styles.knop}
+          onPress={() => navigation.navigate("TutorialSchermD")}
         ></TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -43,6 +45,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     backgroundColor: "#D3FFE0",
+    justifyContent: "center",
     alignItems: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
@@ -50,6 +53,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 50,
   },
+  pokedexicon: {
+    position: "absolute",
+    top: 60,
+    left: 40,
+    width: 42,
+    height: 42,
+  },
+
   tutor: {
     marginTop: 50,
     maxWidth: 323,
@@ -77,4 +88,4 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "180deg" }],
   },
 });
-export default TutorialSchermB;
+export default TutorialSchermC;
