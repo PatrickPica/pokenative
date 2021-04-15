@@ -1,50 +1,53 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useState, useEffect } from "react";
+import React, {useState} from "react";
+import { Button, ImageBackground } from "react-native";
 import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  TouchableOpacity,
+  Dimensions,
   StyleSheet,
-  TextInput,
+  Text,
+  View,
+  Image,
   SafeAreaView,
-  Button,
+  Platform,
+  StatusBar,
+  TouchableOpacity,
 } from "react-native";
-import { ImageBackground } from "react-native";
-import axios from "axios";
 
-const Pokemons = (props) => {
-  const [pokemons, setPokemons] = useState([]);
-  const [pokemon, setPokemon] = useState("");
-  useEffect(() => {
-    fetchPokemons();
-  }, []);
-  const fetchPokemons = () => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=500")
-      .then((response) => response.json())
-      .then((pokemons) => setPokemons(pokemons.results));
-  };
-};
-
-function test({ navigation }) {
-  const randNum = Math.abs(Math.floor(Math.random() * (0 - 151)));
+export default function Home() {
   return (
-    <SafeAreaView style={styles.test}>
-      <Button title="ik snap er niks van" onPress={randNum}></Button>
-      <Text>{Pokemons.name}</Text>
-    </SafeAreaView>
-  );
+    <View>
+      <Text></Text>
+      <Button title="Zoek Pokemon" onPress={this.randomPokemon}></Button>
+    </View>
+  )
+
+
+const styles = StyleSheet.create({})
+
+
+function lekkerpokemon() {
+  const [pokemon, setPokemon] = useState("Start your adventure!");
+  const [pokemonImg, setPokemonImg] = useState();
+  const [wildpokemon, setWildpokemon] = useState("");
+  const [typepokemon, setTypepokemon] = useState();
+  const [nummerpokemon, setNummerpokemon] = useState();
+
+  
+  function randomPokemon() {
+    const randNum = Math.abs(Math.floor(Math.random() * (0 - 151)));
+    fetch(`https://pokeapi.co/api/v2/pokemon/${randNum}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPokemon(data.name);
+        setTypepokemon(data.types);
+        setNummerpokemon(data.id);
+        setWildpokemon("A wild Pokémon appeared!");
+        setPokemonImg(data.sprites.other["official-artwork"].front_default);
+        console.log(data);
+      })
+      .catch(console.error);
+  }
+
 }
-
-const styles = StyleSheet.create({
-  test: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 50,
-  },
-});
-
-export default test;
+}

@@ -38,7 +38,7 @@ function TutorialSchermD({ navigation }) {
         <TouchableOpacity
           title=">"
           style={styles.knop}
-          onPress={() => navigation.navigate("test")}
+          onPress={() => navigation.navigate("Home")}
         ></TouchableOpacity>
       </View>
     </SafeAreaView>
