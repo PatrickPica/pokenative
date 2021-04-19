@@ -7,8 +7,11 @@ import {
   useFonts,
   Rubik_400Regular,
   Rubik_400Regular_Italic,
+  Rubik_700Bold,
+  Rubik_500Medium,
+  Rubik_700Bold_Italic,
 } from "@expo-google-fonts/rubik";
-import { AppLoading } from "expo";
+import AppLoading from "expo-app-loading";
 import {
   Dimensions,
   StyleSheet,
@@ -27,6 +30,7 @@ export default function Home() {
   const [wildpokemon, setWildpokemon] = useState("");
   const [typepokemon, setTypepokemon] = useState();
   const [nummerpokemon, setNummerpokemon] = useState();
+  const combineStyles = StyleSheet.flatten(["poison", "water"]);
 
   function randomPokemon() {
     const randNum = Math.abs(Math.floor(Math.random() * (0 - 151)));
@@ -45,15 +49,51 @@ export default function Home() {
 
   let [fontsLoaded, error] = useFonts({
     Rubik_400Regular,
+    Rubik_700Bold,
+    Rubik_500Medium,
+    Rubik_700Bold_Italic,
   });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <LinearGradient colors={["#08B6B6", "#045B5B"]} style={styles.background}>
+      <Image
+        style={styles.pokedexicon}
+        source={require("../assets/pokedexicon.png")}
+      />
       <SafeAreaView style={styles.encounter}>
         <Text style={styles.appeared}>{wildpokemon}</Text>
-        <Text style={styles.nummer}>#{nummerpokemon}</Text>
+        <Image style={styles.plaatje} source={{ uri: pokemonImg }} />
+        {nummerpokemon && <Text style={styles.nummer}>#{nummerpokemon}</Text>}
         <Text style={styles.pokemonnaam}>{pokemon}</Text>
-        <Text></Text>
-        <Button title="Zoek Pokemon" onPress={randomPokemon}></Button>
+        {typepokemon &&
+          typepokemon.map((type, index) => {
+            return (
+              <Text
+                key={index}
+                style={
+                  type.type.name === "poison"
+                    ? "poison pokemontype"
+                    : type.type.name === "water"
+                }
+              >
+                {type.type.name}
+              </Text>
+            );
+          })}
+        <LinearGradient
+          colors={["rgba(161, 221, 157, 1)", "rgba(44, 205, 168, 1)"]}
+          start={[0, 1]}
+          end={[1, 0]}
+          style={styles.catchknop}
+        >
+          <TouchableOpacity style={styles.catchknop} onPress={randomPokemon}>
+            <Text style={styles.catchtext}>CATCH POKEMON!</Text>
+          </TouchableOpacity>
+        </LinearGradient>
       </SafeAreaView>
     </LinearGradient>
   );
@@ -65,13 +105,70 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
+  appeared: {
+    fontFamily: "Rubik_700Bold_Italic",
+    fontSize: 25,
+    color: "#fff",
+  },
+
   encounter: {
     justifyContent: "center",
     alignItems: "center",
   },
+  plaatje: {
+    height: 302,
+    width: 302,
+  },
+
   pokemonnaam: {
     fontFamily: "Rubik_400Regular",
-    fontSize: 30,
+    fontSize: 39,
     color: "#fff",
+    padding: 10,
+  },
+  nummer: {
+    fontFamily: "Rubik_700Bold",
+    fontSize: 20,
+    borderRadius: 14,
+    backgroundColor: "rgba(255, 255, 255, 0.5);",
+    width: 62,
+    padding: 3,
+    margin: 4,
+    height: 27,
+  },
+  catchknop: {
+    width: 215,
+    height: 53,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 27,
+    margin: 20,
+  },
+  catchtext: {
+    fontFamily: "Rubik_500Medium",
+    fontSize: 20,
+    color: "#fff",
+  },
+  pokedexicon: {
+    position: "absolute",
+    top: 60,
+    left: 40,
+    width: 42,
+    height: 42,
+  },
+
+  pokemontype: {
+    width: 200,
+  },
+
+  poison: {
+    backgroundColor: "#e052e2",
+    width: 82,
+    maxHeight: 24,
+  },
+
+  water: {
+    backgroundColor: "blue",
   },
 });
