@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
   Image,
   Button,
+  ScrollView,
 } from "react-native";
+import PokeCard from "./components/Pokecard";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
@@ -36,26 +38,43 @@ export default function pokedex({ navigation }) {
 
   return (
     <SafeAreaView style={styles.background}>
-      <View style={styles.pokedexoog}>
-        <View style={styles.reflectie}></View>
-        <View style={styles.roodlamp}></View>
-        <View style={styles.geellamp}></View>
-        <View style={styles.groenlamp}></View>
+      <View style={{ flex: 1 }}>
+        <View style={styles.pokedexoog}>
+          <View style={styles.reflectie}></View>
+          <View style={styles.roodlamp}></View>
+          <View style={styles.geellamp}></View>
+          <View style={styles.groenlamp}></View>
+        </View>
+        <Image
+          style={styles.streepje}
+          source={require("../assets/streepPokedex.png")}
+        />
       </View>
-      <Image style={styles.streepje}
-        source={require("../assets/streepPokedex.png")}
-      />
-      <Text style={styles.titel}>Pokédex</Text>
-      <LinearGradient
-        colors={["rgba(161, 221, 157, 1)", "rgba(44, 205, 168, 1)"]}
-        start={[0, 1]}
-        end={[1, 0]}
-        style={styles.terugknop}
-      >
-        <TouchableOpacity onPress={() => navigation.goBack("Home")}>
-          <Text style={styles.knoptext}>GO BACK OUT THERE!</Text>
-        </TouchableOpacity>
-      </LinearGradient>
+      <View style={{ flex: 2 }}>
+        <ScrollView scrollEventThrottle={16}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.titel}>Pokédex</Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              <PokeCard />
+              <PokeCard />
+              <PokeCard />
+            </ScrollView>
+          </View>
+        </ScrollView>
+        <LinearGradient
+          colors={["rgba(161, 221, 157, 1)", "rgba(44, 205, 168, 1)"]}
+          start={[0, 1]}
+          end={[1, 0]}
+          style={styles.terugknop}
+        >
+          <TouchableOpacity onPress={() => navigation.goBack("Home")}>
+            <Text style={styles.knoptext}>GO BACK OUT THERE!</Text>
+          </TouchableOpacity>
+        </LinearGradient>
+      </View>
     </SafeAreaView>
   );
 }
@@ -91,8 +110,8 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     borderWidth: 6,
     position: "absolute",
-    top: 60,
-    left: 30,
+    left: 50,
+    top: 50,
   },
   reflectie: {
     backgroundColor: "#B9ECFF",
@@ -134,13 +153,15 @@ const styles = StyleSheet.create({
     borderColor: "#A20000",
   },
   streepje: {
-    position: "absolute",
-    top: 150,
-    left: 0,
+    marginTop: 120,
   },
   titel: {
     fontFamily: "Rubik_500Medium",
     fontSize: 23,
     color: "#fff",
-  }
+  },
+  pokemoncard: {
+    width: 179,
+    height: 196,
+  },
 });
