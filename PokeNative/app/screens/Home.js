@@ -30,7 +30,6 @@ export default function Home() {
   const [wildpokemon, setWildpokemon] = useState("");
   const [typepokemon, setTypepokemon] = useState();
   const [nummerpokemon, setNummerpokemon] = useState();
-  const combineStyles = StyleSheet.flatten(["poison", "water"]);
 
   function randomPokemon() {
     const randNum = Math.abs(Math.floor(Math.random() * (0 - 151)));
@@ -76,7 +75,7 @@ export default function Home() {
                 key={index}
                 style={
                   type.type.name === "poison"
-                    ? "poison pokemontype"
+                    ? "poison"
                     : type.type.name === "water"
                 }
               >
@@ -136,6 +135,7 @@ const styles = StyleSheet.create({
     padding: 3,
     margin: 4,
     height: 27,
+    overflow: "hidden",
   },
   catchknop: {
     width: 215,
