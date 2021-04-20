@@ -73,11 +73,40 @@ export default function Home() {
             return (
               <Text
                 key={index}
-                style={
+                style={[
+                  styles.pokemontype,
                   type.type.name === "poison"
-                    ? "poison"
+                    ? styles.poison
                     : type.type.name === "water"
-                }
+                    ? styles.water
+                    : type.type.name === "bug"
+                    ? styles.bug
+                    : type.type.name === "normal"
+                    ? styles.normal
+                    : type.type.name === "electric"
+                    ? styles.electric
+                    : type.type.name === "fighting"
+                    ? styles.fighting
+                    : type.type.name === "ground"
+                    ? styles.ground
+                    : type.type.name === "psychic"
+                    ? styles.psychic
+                    : type.type.name === "rock"
+                    ? styles.rock
+                    : type.type.name === "fire"
+                    ? styles.fire
+                    : type.type.name === "grass"
+                    ? styles.grass
+                    : type.type.name === "ice"
+                    ? styles.ice
+                    : type.type.name === "flying"
+                    ? styles.flying
+                    : type.type.name === "ghost"
+                    ? styles.ghost
+                    : type.type.name === "dragon"
+                    ? styles.dragon
+                    : "",
+                ]}
               >
                 {type.type.name}
               </Text>
@@ -125,6 +154,7 @@ const styles = StyleSheet.create({
     fontSize: 39,
     color: "#fff",
     padding: 10,
+    textAlign: "center",
   },
   nummer: {
     fontFamily: "Rubik_700Bold",
@@ -136,6 +166,7 @@ const styles = StyleSheet.create({
     margin: 4,
     height: 27,
     overflow: "hidden",
+    textAlign: "center",
   },
   catchknop: {
     width: 215,
@@ -159,16 +190,76 @@ const styles = StyleSheet.create({
   },
 
   pokemontype: {
-    width: 200,
+    width: 82,
+    maxHeight: 24,
+    textAlign: "center",
+    color: "#fff",
+    fontFamily: "Rubik_500Medium",
+    borderRadius: 6,
+    margin: 5,
+    fontSize: 16,
   },
 
   poison: {
     backgroundColor: "#e052e2",
-    width: 82,
-    maxHeight: 24,
   },
 
   water: {
-    backgroundColor: "blue",
+    backgroundColor: "#3da1df",
+  },
+
+  bug: {
+    backgroundColor: "#a8b821",
+  },
+
+  normal: {
+    backgroundColor: "#a8a878",
+  },
+
+  electric: {
+    backgroundColor: "#f8d030",
+  },
+
+  fighting: {
+    backgroundColor: "#c03028",
+  },
+
+  ground: {
+    backgroundColor: "#e0c068",
+  },
+
+  psychic: {
+    backgroundColor: "#f85888",
+  },
+
+  rock: {
+    backgroundColor: "#b8a038",
+  },
+
+  dark: {
+    backgroundColor: "#705848",
+  },
+
+  fire: {
+    backgroundColor: "#f08030",
+  },
+  grass: {
+    backgroundColor: "#4ddf3d",
+  },
+
+  ice: {
+    backgroundColor: "#98d8d8",
+  },
+
+  flying: {
+    backgroundColor: "#a890f0",
+  },
+
+  ghost: {
+    backgroundColor: "#943ddf",
+  },
+
+  dragon: {
+    backgroundColor: "#7038f8",
   },
 });
