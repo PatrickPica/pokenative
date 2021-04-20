@@ -17,7 +17,10 @@ import {
 function TutorialSchermD({ navigation }) {
   return (
     <SafeAreaView style={styles.background}>
-      <Image style={styles.pokedexicon} source={require('../assets/pokedexicon.png')}/>
+      <Image
+        style={styles.pokedexicon}
+        source={require("../assets/pokedexicon.png")}
+      />
       <Image
         style={styles.profoak}
         source={{
@@ -29,11 +32,13 @@ function TutorialSchermD({ navigation }) {
       ></Image>
       <View style={styles.tutor}>
         <Text>
-        It automatically records data on Pokémon you’ve seen or caught!
-Well go out there and good luck!        </Text>
+          It automatically records data on Pokémon you’ve seen or caught! Well
+          go out there and good luck!{" "}
+        </Text>
         <TouchableOpacity
           title=">"
           style={styles.knop}
+          onPress={() => navigation.navigate("Home")}
         ></TouchableOpacity>
       </View>
     </SafeAreaView>
