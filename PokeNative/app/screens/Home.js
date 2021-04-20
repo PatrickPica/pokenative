@@ -24,7 +24,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function Home() {
+export default function Home( {navigation} ) {
   const [pokemon, setPokemon] = useState("Start your adventure!");
   const [pokemonImg, setPokemonImg] = useState();
   const [wildpokemon, setWildpokemon] = useState("");
@@ -59,10 +59,10 @@ export default function Home() {
 
   return (
     <LinearGradient colors={["#08B6B6", "#045B5B"]} style={styles.background}>
+      <TouchableOpacity style={styles.pokedexicon}onPress={() => navigation.navigate("Pokedex")}>
       <Image
-        style={styles.pokedexicon}
         source={require("../assets/pokedexicon.png")}
-      />
+      /></TouchableOpacity>
       <SafeAreaView style={styles.encounter}>
         <Text style={styles.appeared}>{wildpokemon}</Text>
         <Image style={styles.plaatje} source={{ uri: pokemonImg }} />
@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     margin: 5,
     fontSize: 16,
+    overflow: "hidden",
   },
 
   poison: {
