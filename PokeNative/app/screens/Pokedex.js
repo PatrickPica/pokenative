@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,6 +8,8 @@ import {
   Image,
   Button,
   ScrollView,
+  filter,
+  searchfield,
 } from "react-native";
 import PokeCard from "./components/Pokecard";
 import { NavigationContainer } from "@react-navigation/native";
@@ -21,10 +23,38 @@ import {
   Rubik_500Medium,
   Rubik_700Bold_Italic,
 } from "@expo-google-fonts/rubik";
-
+import Home from "../screens/Home";
+import randomPokemon from "../screens/Home";
+import pokemon from "../screens/Home";
 import AppLoading from "expo-app-loading";
+import { TextInput } from "react-native-gesture-handler";
+import { Value } from "react-native-reanimated";
 
 export default function pokedex({ navigation }) {
+  const Pokemons = (props) => {
+    const [pokemons, setPokemons] = useState([]);
+    const [pokemonImg, setPokemonImg] = useState();
+    const [searchfield, setSearchfield] = useState("");
+    const [typepokemon, setTypepokemon] = useState();
+    const [nummerpokemon, setNummerpokemon] = useState();
+
+    useEffect(() => {
+      fetchPokemons();
+    }, []);
+
+    const fetchPokemons = () => {
+      fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+        .then((response) => response.json())
+        .then((pokemons) => {
+          setPokemon(pokemons.results);
+          setTypepokemon(pokemons.types);
+          setNummerpokemon(pokemons.id);
+          // setPokemonImg(data.sprites.other["official-artwork"].front_default);
+          console.log(pokemons);
+        })
+        .catch(console.error);
+    };
+  };
   let [fontsLoaded, error] = useFonts({
     Rubik_400Regular,
     Rubik_700Bold,
@@ -35,7 +65,6 @@ export default function pokedex({ navigation }) {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-
   return (
     <SafeAreaView style={styles.background}>
       <View style={{ flex: 1 }}>
@@ -54,13 +83,33 @@ export default function pokedex({ navigation }) {
         <ScrollView scrollEventThrottle={16}>
           <View style={{ flex: 1 }}>
             <Text style={styles.titel}>Pokédex</Text>
+            <View style={styles.searchbar}>
+              <TextInput
+                placeholder="Search Pokemons"
+                onChangeText={(Value) => setSearchfield(Value)}
+                value={searchfield}
+              ></TextInput>
+            </View>
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              <PokeCard />
-              <PokeCard />
-              <PokeCard />
+              {pokemons
+                .filter((pokemon) =>
+                  pokemon.name.toLowerCase().includes(searchfeild.toLowerCase())
+                )
+                .map((pokemon, index) => {
+                  <View style={styles.kaart} key={index}>
+                    <View style={{ flex: 2 }}>
+                      <Image></Image>
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <Text></Text>
+                      <Text>{pokemon.name}</Text>
+                      <Text>nummer</Text>
+                    </View>
+                  </View>;
+                })}
             </ScrollView>
           </View>
         </ScrollView>
@@ -160,8 +209,23 @@ const styles = StyleSheet.create({
     fontSize: 23,
     color: "#fff",
   },
-  pokemoncard: {
-    width: 179,
+  kaart: {
     height: 196,
+    width: 179,
+    marginLeft: 20,
+    backgroundColor: "#B90611",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 26,
+  },
+  searchbar: {
+    height: 30,
+    borderRadius: 50,
+    backgroundColor: "#B90611",
+    width: 250,
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 20,
   },
 });
