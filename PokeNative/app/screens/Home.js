@@ -40,7 +40,7 @@ export default function Home({ navigation }) {
         setTypepokemon(data.types);
         setNummerpokemon(data.id);
         setWildpokemon("A wild Pokémon appeared!");
-        setPokemonImg;
+        setPokemonImg(data.sprites.other["official-artwork"].front_default);
         console.log(data);
       })
       .catch(console.error);

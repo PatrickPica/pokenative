@@ -45,11 +45,24 @@ export default function pokedex({ navigation }) {
       .then((pokemons) => {
         setPokemons(pokemons.results);
         // setPokemonImg(pokemons.sprites.other["official-artwork"].front_default);
-        console.log(pokemons.results);
       })
       .catch(console.error);
   };
 
+  useEffect(() => {
+    plaatjePokemon();
+  }, []);
+
+  const plaatjePokemon = () => {
+    const pokemonNummer = 1;
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNummer}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPokemonImg(data.sprites.other["official-artwork"].front_default);
+        console.log(data);
+      })
+      .catch(console.error);
+  }
   let [fontsLoaded, error] = useFonts({
     Rubik_400Regular,
     Rubik_700Bold,
@@ -89,14 +102,14 @@ export default function pokedex({ navigation }) {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              {pokemons.map((pokemon, index) => {
+              {pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(searchfield.toLowerCase())).map((pokemon, index) => {
                 return (
                   <View style={styles.kaart}>
                     <View style={{ flex: 2 }}>
                       <Image
                         style={styles.pokemonplaatje}
                         source={{
-                          uri: `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${pokemon.name}.png`,
+                          uri: pokemonImg
                         }}
                       ></Image>
                     </View>
@@ -106,16 +119,6 @@ export default function pokedex({ navigation }) {
                   </View>
                 );
               })}
-              {/* <View style={styles.kaart}>
-                <View style={{ flex: 2 }}>
-                  <Image></Image>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text></Text>
-                  <Text></Text>
-                  <Text>nummer</Text>
-                </View>
-              </View> */}
             </ScrollView>
           </View>
         </ScrollView>
