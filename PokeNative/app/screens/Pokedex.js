@@ -31,30 +31,25 @@ import { TextInput } from "react-native-gesture-handler";
 import { Value } from "react-native-reanimated";
 
 export default function pokedex({ navigation }) {
-  const Pokemons = (props) => {
-    const [pokemons, setPokemons] = useState([]);
-    const [pokemonImg, setPokemonImg] = useState();
-    const [searchfield, setSearchfield] = useState("");
-    const [typepokemon, setTypepokemon] = useState();
-    const [nummerpokemon, setNummerpokemon] = useState();
+  const [pokemons, setPokemons] = useState([]);
+  const [pokemonImg, setPokemonImg] = useState();
+  const [searchfield, setSearchfield] = useState("");
 
-    useEffect(() => {
-      fetchPokemons();
-    }, []);
+  useEffect(() => {
+    fetchPokemons();
+  }, []);
 
-    const fetchPokemons = () => {
-      fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-        .then((response) => response.json())
-        .then((pokemons) => {
-          setPokemon(pokemons.results);
-          setTypepokemon(pokemons.types);
-          setNummerpokemon(pokemons.id);
-          // setPokemonImg(data.sprites.other["official-artwork"].front_default);
-          console.log(pokemons);
-        })
-        .catch(console.error);
-    };
+  const fetchPokemons = () => {
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+      .then((response) => response.json())
+      .then((pokemons) => {
+        setPokemons(pokemons.results);
+        // setPokemonImg(pokemons.sprites.other["official-artwork"].front_default);
+        console.log(pokemons.results);
+      })
+      .catch(console.error);
   };
+
   let [fontsLoaded, error] = useFonts({
     Rubik_400Regular,
     Rubik_700Bold,
@@ -94,22 +89,33 @@ export default function pokedex({ navigation }) {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              {pokemons
-                .filter((pokemon) =>
-                  pokemon.name.toLowerCase().includes(searchfeild.toLowerCase())
-                )
-                .map((pokemon, index) => {
-                  <View style={styles.kaart} key={index}>
+              {pokemons.map((pokemon, index) => {
+                return (
+                  <View style={styles.kaart}>
                     <View style={{ flex: 2 }}>
-                      <Image></Image>
+                      <Image
+                        style={styles.pokemonplaatje}
+                        source={{
+                          uri: `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${pokemon.name}.png`,
+                        }}
+                      ></Image>
                     </View>
                     <View style={{ flex: 1 }}>
-                      <Text></Text>
-                      <Text>{pokemon.name}</Text>
-                      <Text>nummer</Text>
+                      <Text key={index}>{pokemon.name}</Text>
                     </View>
-                  </View>;
-                })}
+                  </View>
+                );
+              })}
+              {/* <View style={styles.kaart}>
+                <View style={{ flex: 2 }}>
+                  <Image></Image>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text></Text>
+                  <Text></Text>
+                  <Text>nummer</Text>
+                </View>
+              </View> */}
             </ScrollView>
           </View>
         </ScrollView>
@@ -227,5 +233,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 20,
+  },
+  pokemonplaatje: {
+    width: 147,
+    height: 147,
   },
 });
