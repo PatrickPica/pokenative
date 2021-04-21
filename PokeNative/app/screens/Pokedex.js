@@ -49,20 +49,8 @@ export default function pokedex({ navigation }) {
       .catch(console.error);
   };
 
-  useEffect(() => {
-    plaatjePokemon();
-  }, []);
+  // const [testArrayNamesPokemon, setTestArrayNamesPokemon] = useState()
 
-  const plaatjePokemon = () => {
-    const pokemonNummer = 1;
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNummer}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPokemonImg(data.sprites.other["official-artwork"].front_default);
-        console.log(data);
-      })
-      .catch(console.error);
-  }
   let [fontsLoaded, error] = useFonts({
     Rubik_400Regular,
     Rubik_700Bold,
@@ -102,23 +90,42 @@ export default function pokedex({ navigation }) {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              {pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(searchfield.toLowerCase())).map((pokemon, index) => {
-                return (
-                  <View style={styles.kaart}>
-                    <View style={{ flex: 2 }}>
-                      <Image
-                        style={styles.pokemonplaatje}
-                        source={{
-                          uri: pokemonImg
-                        }}
-                      ></Image>
+              {pokemons
+                .filter((pokemon) =>
+                  pokemon.name.toLowerCase().includes(searchfield.toLowerCase())
+                )
+                .map((pokemon, index) => {
+                  // function pakPlaatje() {
+                  //   fetch(pokemon.url)
+                  //     .then((response) => response.json())
+                  //     .then((data) => {
+                  //       // console.log(
+                  //       //   data.sprites.other["official-artwork"].front_default
+                  //       // );
+                  //       setTestArrayNamesPokemon(data.sprites.other["official-artwork"].front_default)
+
+                  //     });
+                  // }
+                  // pakPlaatje();
+                  return (
+                    <View style={styles.kaart} key={index}>
+                      <View style={{ flex: 2 }}>
+                        <Image
+                          style={styles.pokemonplaatje}
+                          key={index}
+                          source={{
+                            uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+                              index + 1
+                            }.png`,
+                          }}
+                        ></Image>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text key={index}>{pokemon.name}</Text>
+                      </View>
                     </View>
-                    <View style={{ flex: 1 }}>
-                      <Text key={index}>{pokemon.name}</Text>
-                    </View>
-                  </View>
-                );
-              })}
+                  );
+                })}
             </ScrollView>
           </View>
         </ScrollView>
