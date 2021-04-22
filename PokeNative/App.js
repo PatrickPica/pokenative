@@ -18,12 +18,13 @@ const StackNavigator = () => (
       headerShown: false,
     }}
   >
-        <Stack.Screen name="Pokedex" component={pokedex} />
+        
     <Stack.Screen name="TutorialScherm" component={TutorialScherm} />
     <Stack.Screen name="TutorialSchermB" component={TutorialSchermB} />
     <Stack.Screen name="TutorialSchermC" component={TutorialSchermC} />
     <Stack.Screen name="TutorialSchermD" component={TutorialSchermD} />
     <Stack.Screen name="Home" component={test} />
+    <Stack.Screen name="Pokedex" component={pokedex} />
   </Stack.Navigator>
 );
 
