@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Icon,  } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -30,10 +30,11 @@ import AppLoading from "expo-app-loading";
 import { TextInput } from "react-native-gesture-handler";
 import { Value } from "react-native-reanimated";
 
-export default function pokedex({ navigation }) {
+export default function pokedex ({ navigation }) {
   const [pokemons, setPokemons] = useState([]);
   const [pokemonImg, setPokemonImg] = useState();
   const [searchfield, setSearchfield] = useState("");
+
 
   useEffect(() => {
     fetchPokemons();
@@ -95,41 +96,31 @@ export default function pokedex({ navigation }) {
                   pokemon.name.toLowerCase().includes(searchfield.toLowerCase())
                 )
                 .map((pokemon, index) => {
-                  // function pakPlaatje() {
-                  //   fetch(pokemon.url)
-                  //     .then((response) => response.json())
-                  //     .then((data) => {
-                  //       // console.log(
-                  //       //   data.sprites.other["official-artwork"].front_default
-                  //       // );
-                  //       setTestArrayNamesPokemon(data.sprites.other["official-artwork"].front_default)
-
-                  //     });
-                  // }
-                  // pakPlaatje();
                   return (
-                    <View style={styles.kaart} key={index}>
-                      <View style={{ flex: 2 }}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Details")} style={styles.kaart} key={index}>
+                      <View style={{ flex: 2, marginBottom: 40, }}>
                         <Image
                           style={styles.pokemonplaatje}
                           key={index}
                           source={{
-                            uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-                              index + 1
+                            uri: `https://img.pokemondb.net/sprites/home/normal/${
+                              pokemon.name
                             }.png`,
                           }}
                         ></Image>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Text key={index}>{pokemon.name}</Text>
+                        <Text style={styles.pokenaam} key={index}>{pokemon.name}</Text>
                       </View>
-                    </View>
+                    </TouchableOpacity>
                   );
                 })}
             </ScrollView>
           </View>
         </ScrollView>
-        <LinearGradient
+  
+      </View>
+      <LinearGradient
           colors={["rgba(161, 221, 157, 1)", "rgba(44, 205, 168, 1)"]}
           start={[0, 1]}
           end={[1, 0]}
@@ -139,7 +130,6 @@ export default function pokedex({ navigation }) {
             <Text style={styles.knoptext}>GO BACK OUT THERE!</Text>
           </TouchableOpacity>
         </LinearGradient>
-      </View>
     </SafeAreaView>
   );
 }
@@ -224,6 +214,7 @@ const styles = StyleSheet.create({
     fontFamily: "Rubik_500Medium",
     fontSize: 23,
     color: "#fff",
+    marginLeft: 20,
   },
   kaart: {
     height: 196,
@@ -248,4 +239,11 @@ const styles = StyleSheet.create({
     width: 147,
     height: 147,
   },
+  pokenaam: {
+    fontFamily: "Rubik_700Bold",
+    color: "#fff",
+    paddingTop: 10,
+    fontSize: 16,
+
+  }
 });
