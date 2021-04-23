@@ -23,14 +23,16 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
+import react from "react";
 
+// Hier komt t meest lastige van mijn app, ik heb gelukkig wel gebruik kunnen maken van mijn app gemaakt in react maar er zaten toch nog wel wat verschillen in.
 export default function Home({ navigation }) {
   const [pokemon, setPokemon] = useState("Start your adventure!");
   const [pokemonImg, setPokemonImg] = useState();
   const [wildpokemon, setWildpokemon] = useState("");
   const [typepokemon, setTypepokemon] = useState();
   const [nummerpokemon, setNummerpokemon] = useState();
-
+// Hieronder sla ik dus alle data op van de api van een specifieke pokemon in de use states die hierboven staan vermeld
   function randomPokemon() {
     const randNum = Math.abs(Math.floor(Math.random() * (0 - 151)));
     fetch(`https://pokeapi.co/api/v2/pokemon/${randNum}`)
@@ -56,14 +58,14 @@ export default function Home({ navigation }) {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-
+// Hieronder gebruik ik die variabelen waarin de data van de api zijn opgeslagen in elementen van de app
   return (
     <LinearGradient colors={["#08B6B6", "#045B5B"]} style={styles.background}>
       <TouchableOpacity
         style={styles.pokedexicon}
         onPress={() => navigation.navigate("Pokedex")}
       >
-        <Image source={require("../assets/pokedexicon.png")} />
+        <Image style={styles.pokedexicoon} source={require("../assets/pokedexicon.png")} />
       </TouchableOpacity>
       <SafeAreaView style={styles.encounter}>
         <Text style={styles.appeared}>{wildpokemon}</Text>
@@ -118,8 +120,9 @@ export default function Home({ navigation }) {
           colors={["rgba(161, 221, 157, 1)", "rgba(44, 205, 168, 1)"]}
           start={[0, 1]}
           end={[1, 0]}
-          style={styles.catchknop}
-        >
+          style={styles.catchknop}>
+        {/* //Hier roep ik de functie aan die een random pokemon met daarbij de data van de api. */}
+        
           <TouchableOpacity style={styles.catchknop} onPress={randomPokemon}>
             <Text style={styles.catchtext}>CATCH POKEMON!</Text>
           </TouchableOpacity>
@@ -128,7 +131,7 @@ export default function Home({ navigation }) {
     </LinearGradient>
   );
 }
-
+// Hieronder volgt de style van de pagina
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -265,4 +268,8 @@ const styles = StyleSheet.create({
   dragon: {
     backgroundColor: "#7038f8",
   },
+  pokedexicoon: {
+    width: 42,
+    height:42,
+  }
 });

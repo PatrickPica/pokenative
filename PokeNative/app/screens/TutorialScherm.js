@@ -14,7 +14,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-
+//Hieronder komt de functie om de pagina te maken, hier laad ik onder andere meerdere elementen in om de pagina te maken.
 function TutorialScherm({ navigation }) {
   return (
     <SafeAreaView style={styles.background}>
@@ -35,6 +35,7 @@ function TutorialScherm({ navigation }) {
           Hi, I'm proffesor Oak and welcome to the world of Pokémon! First, what
           is your name?
         </Text>
+        {/* hier laat ik doormiddel van een navigation die ik in app.js heb aangemaakt de schermen met elkaar verbinden. */}
         <TouchableOpacity
           title=">"
           style={styles.knop}
@@ -44,7 +45,7 @@ function TutorialScherm({ navigation }) {
     </SafeAreaView>
   );
 }
-
+// de styling van de pagina
 const styles = StyleSheet.create({
   background: {
     flex: 1,
