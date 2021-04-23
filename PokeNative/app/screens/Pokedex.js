@@ -12,7 +12,7 @@ import {
   searchfield,
 } from "react-native";
 import PokeCard from "./components/Pokecard";
-import { NavigationContainer } from "@react-navigation/native";
+import { getStateFromPath, NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -29,7 +29,9 @@ import pokemon from "../screens/Home";
 import AppLoading from "expo-app-loading";
 import { TextInput } from "react-native-gesture-handler";
 import { Value } from "react-native-reanimated";
+import { ProzaLibre_600SemiBold } from "@expo-google-fonts/dev";
 
+// Hier maak ik weer een paar usestates aan om data op te slaan voor de searchfield en pokemons
 export default function pokedex ({ navigation }) {
   const [pokemons, setPokemons] = useState([]);
   const [pokemonImg, setPokemonImg] = useState();
@@ -45,12 +47,10 @@ export default function pokedex ({ navigation }) {
       .then((response) => response.json())
       .then((pokemons) => {
         setPokemons(pokemons.results);
-        // setPokemonImg(pokemons.sprites.other["official-artwork"].front_default);
       })
       .catch(console.error);
   };
 
-  // const [testArrayNamesPokemon, setTestArrayNamesPokemon] = useState()
 
   let [fontsLoaded, error] = useFonts({
     Rubik_400Regular,
@@ -63,6 +63,7 @@ export default function pokedex ({ navigation }) {
     return <AppLoading />;
   }
   return (
+    // hieronder volgt een hoop css werk haha! maar dat vind ik leuk om te doen om mijn design na te maken van de prototype in XD
     <SafeAreaView style={styles.background}>
       <View style={{ flex: 1 }}>
         <View style={styles.pokedexoog}>
@@ -76,6 +77,8 @@ export default function pokedex ({ navigation }) {
           source={require("../assets/streepPokedex.png")}
         />
       </View>
+      {/* Ik heb hieronder dus de informatie met een horizontale scroller gemaakt, dit vond ik vet en werkt ook nog eens.
+      voor dat scrollen moest ik wel weer even een tutorial volgen over hoe dat moest. */}
       <View style={{ flex: 2 }}>
         <ScrollView scrollEventThrottle={16}>
           <View style={{ flex: 1 }}>
@@ -97,6 +100,8 @@ export default function pokedex ({ navigation }) {
                 )
                 .map((pokemon, index) => {
                   return (
+                    // bij de image hier had ik echter wel een probleem, de api gaf met de globale link alleen een naam terug,
+                    // niet zoals met een specifieke pokemon die dan alles van die pokemon geeft vandaar moest ik een andere afbeeldingen pagina benaderen.
                     <TouchableOpacity onPress={() => navigation.navigate("Details")} style={styles.kaart} key={index}>
                       <View style={{ flex: 2, marginBottom: 40, }}>
                         <Image
@@ -124,8 +129,8 @@ export default function pokedex ({ navigation }) {
           colors={["rgba(161, 221, 157, 1)", "rgba(44, 205, 168, 1)"]}
           start={[0, 1]}
           end={[1, 0]}
-          style={styles.terugknop}
-        >
+          style={styles.terugknop}>
+        // hier navigeer ik weer terug naar de random pokemon scherm
           <TouchableOpacity onPress={() => navigation.goBack("Home")}>
             <Text style={styles.knoptext}>GO BACK OUT THERE!</Text>
           </TouchableOpacity>

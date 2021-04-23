@@ -72,6 +72,8 @@ export default function Home({ navigation }) {
         <Image style={styles.plaatje} source={{ uri: pokemonImg }} />
         {nummerpokemon && <Text style={styles.nummer}>#{nummerpokemon}</Text>}
         <Text style={styles.pokemonnaam}>{pokemon}</Text>
+        {/* hieronder map ik de types onder elkaar en wordt er gecheckt of de desbetreffende type er is? is dit niet zo dan gaat hij naar een andere kijken en 
+        geeft er een andere style aan. */}
         {typepokemon &&
           typepokemon.map((type, index) => {
             return (
