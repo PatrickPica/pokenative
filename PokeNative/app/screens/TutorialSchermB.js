@@ -26,17 +26,15 @@ function TutorialSchermB({ navigation }) {
             "https://www.serebii.net/pokemonmasters/syncpairs/professoroak.png",
         }}
       ></Image>
-      <View style={styles.tutor}>
-        <Text>
-          Your very own Pokémon legend is about to unfold! A world of dreams and
-          adventures with Pokémon awaits! Let's go!
-        </Text>
-        <TouchableOpacity
-          title=">"
-          style={styles.knop}
-          onPress={() => navigation.navigate("TutorialSchermC")}
-        ></TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate("TutorialSchermC")}>
+        <View style={styles.tutor}>
+          <Text>
+            Your very own Pokémon legend is about to unfold! A world of dreams
+            and adventures with Pokémon awaits! Let's go!
+          </Text>
+          <View title=">" style={styles.knop}></View>
+        </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Icon,  } from "react";
+import React, { useState, useEffect, Icon } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -12,7 +12,10 @@ import {
   searchfield,
 } from "react-native";
 import PokeCard from "./components/Pokecard";
-import { getStateFromPath, NavigationContainer } from "@react-navigation/native";
+import {
+  getStateFromPath,
+  NavigationContainer,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -32,11 +35,10 @@ import { Value } from "react-native-reanimated";
 import { ProzaLibre_600SemiBold } from "@expo-google-fonts/dev";
 
 // Hier maak ik weer een paar usestates aan om data op te slaan voor de searchfield en pokemons
-export default function pokedex ({ navigation }) {
+export default function pokedex({ navigation }) {
   const [pokemons, setPokemons] = useState([]);
   const [pokemonImg, setPokemonImg] = useState();
   const [searchfield, setSearchfield] = useState("");
-
 
   useEffect(() => {
     fetchPokemons();
@@ -50,7 +52,6 @@ export default function pokedex ({ navigation }) {
       })
       .catch(console.error);
   };
-
 
   let [fontsLoaded, error] = useFonts({
     Rubik_400Regular,
@@ -102,20 +103,28 @@ export default function pokedex ({ navigation }) {
                   return (
                     // bij de image hier had ik echter wel een probleem, de api gaf met de globale link alleen een naam terug,
                     // niet zoals met een specifieke pokemon die dan alles van die pokemon geeft vandaar moest ik een andere afbeeldingen pagina benaderen.
-                    <TouchableOpacity onPress={() => navigation.navigate("Details")} style={styles.kaart} key={index}>
-                      <View style={{ flex: 2, marginBottom: 40, }}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate("Details", {
+                          pokemon: pokemon.name,
+                        })
+                      }
+                      style={styles.kaart}
+                      key={index}
+                    >
+                      <View style={{ flex: 2, marginBottom: 40 }}>
                         <Image
                           style={styles.pokemonplaatje}
                           key={index}
                           source={{
-                            uri: `https://img.pokemondb.net/sprites/home/normal/${
-                              pokemon.name
-                            }.png`,
+                            uri: `https://img.pokemondb.net/sprites/home/normal/${pokemon.name}.png`,
                           }}
                         ></Image>
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Text style={styles.pokenaam} key={index}>{pokemon.name}</Text>
+                        <Text style={styles.pokenaam} key={index}>
+                          {pokemon.name}
+                        </Text>
                       </View>
                     </TouchableOpacity>
                   );
@@ -123,18 +132,18 @@ export default function pokedex ({ navigation }) {
             </ScrollView>
           </View>
         </ScrollView>
-  
       </View>
       <LinearGradient
-          colors={["rgba(161, 221, 157, 1)", "rgba(44, 205, 168, 1)"]}
-          start={[0, 1]}
-          end={[1, 0]}
-          style={styles.terugknop}>
-        // hier navigeer ik weer terug naar de random pokemon scherm
-          <TouchableOpacity onPress={() => navigation.goBack("Home")}>
-            <Text style={styles.knoptext}>GO BACK OUT THERE!</Text>
-          </TouchableOpacity>
-        </LinearGradient>
+        colors={["rgba(161, 221, 157, 1)", "rgba(44, 205, 168, 1)"]}
+        start={[0, 1]}
+        end={[1, 0]}
+        style={styles.terugknop}
+      >
+        {/* hier navigeer ik weer terug naar de random pokemon scherm */}
+        <TouchableOpacity onPress={() => navigation.goBack("Home")}>
+          <Text style={styles.knoptext}>GO BACK OUT THERE!</Text>
+        </TouchableOpacity>
+      </LinearGradient>
     </SafeAreaView>
   );
 }
@@ -223,7 +232,7 @@ const styles = StyleSheet.create({
   },
   kaart: {
     height: 196,
-    width: 179,
+    width: 190,
     marginLeft: 20,
     backgroundColor: "#B90611",
     alignItems: "center",
@@ -249,6 +258,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     paddingTop: 10,
     fontSize: 16,
-
-  }
+  },
 });

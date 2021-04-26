@@ -22,14 +22,14 @@ const StackNavigator = () => (
   >
     {/* hier benoem ik dan ook alle schermen die ik gebruik in mijn app en zorg dat ze goed allemaal met elkaar linken
     het linken zelf doe je in de pagina zelf maar hier moeten ze allemaal staan in de stacknavigator */}
-  
+
     <Stack.Screen name="TutorialScherm" component={TutorialScherm} />
     <Stack.Screen name="TutorialSchermB" component={TutorialSchermB} />
     <Stack.Screen name="TutorialSchermC" component={TutorialSchermC} />
     <Stack.Screen name="TutorialSchermD" component={TutorialSchermD} />
     <Stack.Screen name="Home" component={Home} />
     <Stack.Screen name="Pokedex" component={pokedex} />
-    <Stack.Screen name="Details" component={Details}/>
+    <Stack.Screen name="Details" component={Details} />
   </Stack.Navigator>
 );
 

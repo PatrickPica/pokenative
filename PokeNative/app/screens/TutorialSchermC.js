@@ -17,7 +17,10 @@ import {
 function TutorialSchermC({ navigation }) {
   return (
     <SafeAreaView style={styles.background}>
-      <Image style={styles.pokedexicon} source={require('../assets/pokedexicon.png')}/>
+      <Image
+        style={styles.pokedexicon}
+        source={require("../assets/pokedexicon.png")}
+      />
       <Image
         style={styles.profoak}
         source={{
@@ -27,16 +30,15 @@ function TutorialSchermC({ navigation }) {
             "https://www.serebii.net/pokemonmasters/syncpairs/professoroak.png",
         }}
       ></Image>
-      <View style={styles.tutor}>
-        <Text>
-        Oh, right! Before I forget, I have a request for you. Here in the top left corner is my invention, Pokédex! 
-        </Text>
-        <TouchableOpacity
-          title=">"
-          style={styles.knop}
-          onPress={() => navigation.navigate("TutorialSchermD")}
-        ></TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate("TutorialSchermD")}>
+        <View style={styles.tutor}>
+          <Text>
+            Oh, right! Before I forget, I have a request for you. Here in the
+            top left corner is my invention, Pokédex!
+          </Text>
+          <View title=">" style={styles.knop}></View>
+        </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
