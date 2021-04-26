@@ -55,7 +55,7 @@ export default function Details({ route, navigation }) {
           }}
         />
         <Text style={styles.pokemonnaam}>{details.name}</Text>
-        <Text style={styles.nummer}>{details.id}</Text>
+        <Text style={styles.nummer}>#{details.id}</Text>
         {pokemontype &&
           pokemontype.map((type, index) => {
             return (
