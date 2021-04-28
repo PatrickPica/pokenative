@@ -30,17 +30,15 @@ function TutorialSchermD({ navigation }) {
             "https://www.serebii.net/pokemonmasters/syncpairs/professoroak.png",
         }}
       ></Image>
-      <View style={styles.tutor}>
-        <Text>
-          It automatically records data on Pokémon you’ve seen or caught! Well
-          go out there and good luck!{" "}
-        </Text>
-        <TouchableOpacity
-          title=">"
-          style={styles.knop}
-          onPress={() => navigation.navigate("Home")}
-        ></TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <View style={styles.tutor}>
+          <Text>
+            It automatically records data on Pokémon you’ve seen or caught! Well
+            go out there and good luck!{" "}
+          </Text>
+          <View title=">" style={styles.knop}></View>
+        </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }

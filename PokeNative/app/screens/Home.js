@@ -23,14 +23,16 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
+import react from "react";
 
-export default function Home( {navigation} ) {
+// Hier komt t meest lastige van mijn app, ik heb gelukkig wel gebruik kunnen maken van mijn app gemaakt in react maar er zaten toch nog wel wat verschillen in.
+export default function Home({ navigation }) {
   const [pokemon, setPokemon] = useState("Start your adventure!");
   const [pokemonImg, setPokemonImg] = useState();
   const [wildpokemon, setWildpokemon] = useState("");
   const [typepokemon, setTypepokemon] = useState();
   const [nummerpokemon, setNummerpokemon] = useState();
-
+  // Hieronder sla ik dus alle data op van de api van een specifieke pokemon in de use states die hierboven staan vermeld
   function randomPokemon() {
     const randNum = Math.abs(Math.floor(Math.random() * (0 - 151)));
     fetch(`https://pokeapi.co/api/v2/pokemon/${randNum}`)
@@ -56,18 +58,25 @@ export default function Home( {navigation} ) {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-
+  // Hieronder gebruik ik die variabelen waarin de data van de api zijn opgeslagen in elementen van de app
   return (
     <LinearGradient colors={["#08B6B6", "#045B5B"]} style={styles.background}>
-      <TouchableOpacity style={styles.pokedexicon}onPress={() => navigation.navigate("Pokedex")}>
-      <Image
-        source={require("../assets/pokedexicon.png")}
-      /></TouchableOpacity>
+      <TouchableOpacity
+        style={styles.pokedexicon}
+        onPress={() => navigation.navigate("Pokedex")}
+      >
+        <Image
+          style={styles.pokedexicoon}
+          source={require("../assets/pokedexicon.png")}
+        />
+      </TouchableOpacity>
       <SafeAreaView style={styles.encounter}>
         <Text style={styles.appeared}>{wildpokemon}</Text>
         <Image style={styles.plaatje} source={{ uri: pokemonImg }} />
         {nummerpokemon && <Text style={styles.nummer}>#{nummerpokemon}</Text>}
         <Text style={styles.pokemonnaam}>{pokemon}</Text>
+        {/* hieronder map ik de types onder elkaar en wordt er gecheckt of de desbetreffende type er is? is dit niet zo dan gaat hij naar een andere kijken en 
+        geeft er een andere style aan. */}
         {typepokemon &&
           typepokemon.map((type, index) => {
             return (
@@ -118,6 +127,8 @@ export default function Home( {navigation} ) {
           end={[1, 0]}
           style={styles.catchknop}
         >
+          {/* //Hier roep ik de functie aan die een random pokemon met daarbij de data van de api. */}
+
           <TouchableOpacity style={styles.catchknop} onPress={randomPokemon}>
             <Text style={styles.catchtext}>CATCH POKEMON!</Text>
           </TouchableOpacity>
@@ -126,7 +137,7 @@ export default function Home( {navigation} ) {
     </LinearGradient>
   );
 }
-
+// Hieronder volgt de style van de pagina
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -262,5 +273,9 @@ const styles = StyleSheet.create({
 
   dragon: {
     backgroundColor: "#7038f8",
+  },
+  pokedexicoon: {
+    width: 42,
+    height: 42,
   },
 });
