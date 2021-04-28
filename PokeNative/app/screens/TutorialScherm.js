@@ -51,6 +51,8 @@ function TutorialScherm({ navigation }) {
             "https://www.serebii.net/pokemonmasters/syncpairs/professoroak.png",
         }}
       ></Image>
+      {/* Hier komt de modal ik heb dit als laatst gemaakt van de app. Was niet heel lastig
+      Ik heb online gekeken naar hoe dit moest wat vrij simpel was. */}
       <Modal
         style={styles.modal}
         animationType="fade"

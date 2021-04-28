@@ -12,7 +12,9 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
+import { PragatiNarrow_400Regular } from "@expo-google-fonts/dev";
 
+// Hier doe ik in principe hetzelfde als bij de home pagina ik maak een variabele met alle details van een specifieke pokemon
 export default function Details({ route, navigation }) {
   const [details, setDetails] = useState([]);
   const [pokemontype, setPokemontype] = useState();
