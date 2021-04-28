@@ -3,6 +3,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState } from "react";
 import { ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import AppLoading from "expo-app-loading";
+import {
+  useFonts,
+  Rubik_400Regular,
+  Rubik_400Regular_Italic,
+  Rubik_700Bold,
+  Rubik_500Medium,
+  Rubik_700Bold_Italic,
+} from "@expo-google-fonts/rubik";
 import {
   Dimensions,
   StyleSheet,
@@ -21,11 +30,30 @@ import { TextInput } from "react-native-gesture-handler";
 //Hieronder komt de functie om de pagina te maken, hier laad ik onder andere meerdere elementen in om de pagina te maken.
 function TutorialScherm({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  let [fontsLoaded, error] = useFonts({
+    Rubik_400Regular,
+    Rubik_700Bold,
+    Rubik_500Medium,
+    Rubik_700Bold_Italic,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
   return (
     <SafeAreaView style={styles.background}>
+      <Image
+        style={styles.profoak}
+        source={{
+          width: 187,
+          height: 448,
+          uri:
+            "https://www.serebii.net/pokemonmasters/syncpairs/professoroak.png",
+        }}
+      ></Image>
       <Modal
         style={styles.modal}
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
@@ -38,6 +66,7 @@ function TutorialScherm({ navigation }) {
             <Text style={styles.modalText}>What is your name?</Text>
             <TextInput style={styles.invoerveld} placeholder="name"></TextInput>
             <LinearGradient
+              style={styles.hidemodal}
               colors={["rgba(161, 221, 157, 1)", "rgba(44, 205, 168, 1)"]}
               start={[0, 1]}
               end={[1, 0]}
@@ -46,23 +75,14 @@ function TutorialScherm({ navigation }) {
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                <Text style={styles.textStyle}>Hide Modal</Text>
+                <Text style={styles.textStyle}>Done</Text>
               </Pressable>
             </LinearGradient>
           </View>
         </View>
       </Modal>
-      <Image
-        style={styles.profoak}
-        source={{
-          width: 187,
-          height: 448,
-          uri:
-            "https://www.serebii.net/pokemonmasters/syncpairs/professoroak.png",
-        }}
-      ></Image>
       <Pressable
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.buttonFill, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
       >
         <Text style={styles.modalopentext}>Fill in name</Text>
@@ -91,9 +111,19 @@ const styles = StyleSheet.create({
   },
   modal: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalopentext: {
     color: "#000",
+  },
+
+  hidemodal: {
+    borderRadius: 20,
+    width: 155,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 31,
   },
   modalView: {
     backgroundColor: "#fff",
@@ -103,9 +133,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 33,
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 150,
+  },
   textStyle: {
     fontSize: 16,
     color: "#fff",
+  },
+
+  buttonFill: {
+    position: "absolute",
+    top: 60,
+    left: 30,
+    backgroundColor: "red",
+    borderRadius: 20,
+  },
+  modalopentext: {
+    color: "#fff",
+    padding: 5,
+    fontFamily: "Rubik_500Medium",
   },
   invoerveld: {
     height: 27,
